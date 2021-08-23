@@ -5,6 +5,7 @@ public class perro {
     private int nivelSalud;
     private String color;
     private String nombre;
+    private boolean asignado;
 
     public perro(){
         size = "";
@@ -13,15 +14,17 @@ public class perro {
         nivelSalud = 0;
         color = "";
         nombre = "";
+        asignado = false;
     }
 
-    public perro (String size, String raza, String edadAproximada, String nivelSalud, String color, String nombre){
+    public perro (String size, String raza, String edadAproximada, String nivelSalud, String color, String nombre, boolean asignado){
         this.size = size;
         this.raza = raza;
         this.edadAproximada = Integer.parseInt(edadAproximada);
         this.nivelSalud = Integer.parseInt(nivelSalud);
         this.color = color;
         this.nombre = nombre;
+        this.asignado = asignado;
     }
 
     public String getSize() {
@@ -70,5 +73,13 @@ public class perro {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    
+    public boolean getAsignado(){
+        return asignado;
+    }
+
+    public void setAsignado(boolean asignado){
+        this.asignado = asignado;
     }
 }

@@ -45,12 +45,21 @@ public class Controlador {
             }
             else if (opcion == 3){
                 vis.printCan(system.getDog(), system.getNumPerro());
-                boolean asignado = system.asignarCan(vis.perroACambiar());
-                if (asignado == true){
-                    vis.asignado();
+                int perroACambiar = vis.perroACambiar();
+                boolean asignado = system.getAsignado(perroACambiar);
+                if (asignado == false){
+                    boolean logroAsignarse = system.asignarCan(perroACambiar);
+                    if (logroAsignarse == true){
+                        system.setAsignado(perroACambiar, true);
+                        vis.asignado();
+                    }
+                    else{
+                        system.setAsignado(perroACambiar, true);
+                        vis.perrera();
+                    }
                 }
                 else{
-                    vis.perrera();
+                    vis.perroYaAsignado();
                 }
             }
             else if (opcion == 4){

@@ -43,7 +43,7 @@ public class Vista {
         String[] datos = new String[5];
         System.out.println("¿Cuál es el primer apellido de su familia?");
         datos[0] = scan.nextLine();
-        System.out.println("¿Cuántos miembros hay en su familia? (Si no se conoce coloque 'mestizo')");
+        System.out.println("¿Cuántos miembros hay en su familia?");
         datos[1] = scan.nextLine();
         System.out.println("¿Cuántos niños menores de 10 años tiene?");
         datos[2] = scan.nextLine();
@@ -74,12 +74,13 @@ public class Vista {
             System.out.println("Estado de salud: " + datosCan[fila].getNivelSalud());
             System.out.println("Color: " + datosCan[fila].getColor());
             System.out.println("Nombre: " + datosCan[fila].getNombre());
+            System.out.println("Asignado: " + datosCan[fila].getAsignado());
             System.out.println("---------------------------------");
         }
     }
 
     public int perroACambiar(){
-        System.out.println("Elija un perro mediante el número de filas");
+        System.out.println("Elija un perro mediante el número del campo 'Perro'");
         String respuesta = scan.nextLine();
         int respuestaInt = Integer.parseInt(respuesta);
         return respuestaInt;
@@ -105,5 +106,9 @@ public class Vista {
 
     public void asignado(){
         System.out.println("El perro fue asignado correctamente");
+    }
+
+    public void perroYaAsignado(){
+        System.out.println("El perro elegido ya fue asignado");
     }
 }

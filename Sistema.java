@@ -39,7 +39,8 @@ public class Sistema {
             String nivelSalud = datos[3];
             String color = datos[4];
             String nombre = datos[5];
-            perro nuevoDog = new perro(size, raza, edadAproximada, nivelSalud, color, nombre);
+            boolean asignado = false;
+            perro nuevoDog = new perro(size, raza, edadAproximada, nivelSalud, color, nombre, asignado);
             dog[numPerro] = nuevoDog;
             numPerro += 1;
             seAgrego = true;
@@ -53,62 +54,77 @@ public class Sistema {
     public boolean asignarCan(int fila){
         String size = dog[fila].getSize();
         String raza = dog[fila].getRaza();
-        for (int a = 0; a < 17; a++){
-            if (raza == perrosPeligrosos[a]){
-                for (int k = 0; k < 15; k++){
-                    if (fam[k].getCantidadMascotas() < 4){
-                        if (fam[k].getcantidadKidsMenor10() == 0 && fam[k].getCantidadKidsMayor10() == 0){
-                            int cantMascotas = fam[k].getCantidadMascotas();
-                            cantMascotas += 1;
-                            fam[k].setCantidadMascotas(cantMascotas);
-                            asignado = true;
+        boolean isPerroAsignado = dog[fila].getAsignado();
+        if (isPerroAsignado == false){
+            for (int a = 0; a < 17; a++){
+                if (raza == perrosPeligrosos[a]){
+                    for (int k = 0; k < 15; k++){
+                        if (fam[k].getCantidadMascotas() < 4){
+                            if (fam[k].getcantidadKidsMenor10() == 0 && fam[k].getCantidadKidsMayor10() == 0){
+                                int cantMascotas = fam[k].getCantidadMascotas();
+                                cantMascotas += 1;
+                                fam[k].setCantidadMascotas(cantMascotas);
+                                asignado = true;
+                            }
+                            break;
                         }
-                        break;
+                    }
+                    break;
+                }
+            }
+            if (asignado == false){
+                if (size == "pequeño"){
+                    for (int i = 0; i < 15; i++){
+                        int cantMascotas = fam[i].getCantidadMascotas();
+                        if (cantMascotas < 4){
+                            cantMascotas += 1;
+                            fam[i].setCantidadMascotas(cantMascotas);
+                            asignado = true;
+                            break;    
+                        }
                     }
                 }
-                break;
+                else if (size == "mediano"){
+                    for (int o = 0; o < 15; o++){
+                        int cantMascotas = fam[o].getCantidadMascotas();
+                        if (cantMascotas < 4){
+                            if (fam[o].getcantidadKidsMenor10() == 0){
+                                cantMascotas += 1;
+                                fam[0].setCantidadMascotas(cantMascotas);
+                                asignado = true;
+                                break;  
+                            }
+                        }
+                    }
+                }
+                else if (size == "grande"){
+                    for (int p = 0; p < 15; p++){
+                        int cantMascotas = fam[p].getCantidadMascotas();
+                        if (cantMascotas < 4){
+                            if (fam[p].getcantidadKidsMenor10() == 0 && fam[p].getCantidadKidsMayor10() == 0){
+                                cantMascotas += 1;
+                                fam[p].setCantidadMascotas(cantMascotas);
+                                asignado = true;
+                                break;  
+                            }
+                        }
+                    }
+                }
             }
+            return asignado;
         }
-        if (asignado == false){
-            if (size == "pequeño"){
-                for (int i = 0; i < 15; i++){
-                    int cantMascotas = fam[i].getCantidadMascotas();
-                    if (cantMascotas < 4){
-                        cantMascotas += 1;
-                        fam[i].setCantidadMascotas(cantMascotas);
-                        asignado = true;
-                        break;    
-                    }
-                }
-            }
-            else if (size == "mediano"){
-                for (int o = 0; o < 15; o++){
-                    int cantMascotas = fam[o].getCantidadMascotas();
-                    if (cantMascotas < 4){
-                        if (fam[o].getcantidadKidsMenor10() == 0){
-                            cantMascotas += 1;
-                            fam[0].setCantidadMascotas(cantMascotas);
-                            asignado = true;
-                            break;  
-                        }
-                    }
-                }
-            }
-            else if (size == "grande"){
-                for (int p = 0; p < 15; p++){
-                    int cantMascotas = fam[p].getCantidadMascotas();
-                    if (cantMascotas < 4){
-                        if (fam[p].getcantidadKidsMenor10() == 0 && fam[p].getCantidadKidsMayor10() == 0){
-                            cantMascotas += 1;
-                            fam[p].setCantidadMascotas(cantMascotas);
-                            asignado = true;
-                            break;  
-                        }
-                    }
-                }
-            }
+        else{
+            return asignado;
         }
+    }
+
+    public boolean getAsignado(int fila){
+        boolean asignado = dog[fila].getAsignado();
         return asignado;
+    }
+
+    public void setAsignado(int fila, boolean asignado){
+        dog[fila].setAsignado(asignado);
     }
 
     public perro[] getDog() {
